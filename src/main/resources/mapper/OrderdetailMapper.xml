@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.OrderdetailMapper" >
+  <resultMap id="BaseResultMap" type="empty.Orderdetail" >
+    <id column="detail_id" property="detailId" jdbcType="VARCHAR" />
+    <result column="foo_id" property="fooId" jdbcType="INTEGER" />
+    <result column="ord_id" property="ordId" jdbcType="VARCHAR" />
+    <result column="food_name" property="foodName" jdbcType="VARCHAR" />
+    <result column="foodCount" property="foodcount" jdbcType="INTEGER" />
+    <result column="food_privice" property="foodPrivice" jdbcType="DOUBLE" />
+    <result column="total_Money" property="totalMoney" jdbcType="DOUBLE" />
+  </resultMap>
+
+  <!--动态查询关键字，总记录列表-->
+  <select id="selectPageListUseDyc" parameterType="empty.Page" resultMap="BaseResultMap">
+    SELECT detail_id,foo_id,ord_id,food_name,foodCount,food_privice from orderdetail
+    <where>
+      <if test="paramEntity.ordId!=null"> and ord_id like #{paramEntity.ordId}</if>
+    </where>
+    limit #{start},#{rows}
+  </select>
+
+  <!-- 动态查询关键字，总记录数 -->
+  <select id="selectPageCountUseDyc" resultType="Integer">
+    SELECT COUNT(1) from orderdetail
+    <where>
+      <if test="paramEntity.ordId!=null"> and ord_id like #{paramEntity.ordId}</if>
+    </where>
+  </select>
+
+  <!-- 新增订单明细 -->
+  <insert id="insert" parameterType="empty.Orderdetail">
+    INSERT INTO orderdetail(detail_id,foo_id,ord_id,food_name,foodCount,food_privice,total_Money)
+    VALUES (#{detailId},#{fooId},#{ordId},#{foodName},#{foodcount},#{foodPrivice},#{totalMoney})
+  </insert>
+
+
+</mapper>

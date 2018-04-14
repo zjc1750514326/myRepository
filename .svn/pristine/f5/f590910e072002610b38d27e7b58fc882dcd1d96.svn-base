@@ -1,0 +1,10 @@
+package service.impl;
+
+import empty.Orders;
+import service.OrdersService;
+
+/**
+ * Created by zjc on 2018/3/26.
+ */
+public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements OrdersService {
+}

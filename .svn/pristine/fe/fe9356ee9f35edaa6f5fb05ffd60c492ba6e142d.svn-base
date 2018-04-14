@@ -1,0 +1,65 @@
+package empty;
+
+import java.util.Date;
+
+public class Orders {
+    private Integer id;
+
+    private Integer dtabId;
+
+    private Integer detailId;
+
+    private Double ordertotaleprice;
+
+    private Date orderdate;
+
+    private Integer orderstate;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getDtabId() {
+        return dtabId;
+    }
+
+    public void setDtabId(Integer dtabId) {
+        this.dtabId = dtabId;
+    }
+
+    public Integer getDetailId() {
+        return detailId;
+    }
+
+    public void setDetailId(Integer detailId) {
+        this.detailId = detailId;
+    }
+
+    public Double getOrdertotaleprice() {
+        return ordertotaleprice;
+    }
+
+    public void setOrdertotaleprice(Double ordertotaleprice) {
+        this.ordertotaleprice = ordertotaleprice;
+    }
+
+    public Date getOrderdate() {
+        return orderdate;
+    }
+
+    public void setOrderdate(Date orderdate) {
+        this.orderdate = orderdate;
+    }
+
+    public Integer getOrderstate() {
+        return orderstate;
+    }
+
+    public void setOrderstate(Integer orderstate) {
+        this.orderstate = orderstate;
+    }
+}

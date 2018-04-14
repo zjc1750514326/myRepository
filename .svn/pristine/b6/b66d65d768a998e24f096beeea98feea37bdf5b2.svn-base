@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.StyleMapper" >
+  <resultMap id="BaseResultMap" type="empty.Style" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="styleName" property="stylename" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <!-- 查询列表 -->
+  <select id="selectPageListUseDyc" parameterType="empty.Page" resultMap="BaseResultMap">
+    SELECT id ,styleName FROM style limit #{start},#{rows}
+  </select>
+
+  <!-- 查询列表总数 -->
+  <select id="selectPageCountUseDyc" resultType="Integer">
+    SELECT COUNT(1) FROM style
+  </select>
+
+  <!--添加菜系-->
+  <insert id="insert" parameterType="empty.Style">
+    INSERT INTO style(id,styleName) VALUES (#{id},#{stylename})
+  </insert>
+
+  <!--修改菜系-->
+  <update id="update" parameterType="empty.Style">
+    UPDATE style SET styleName = #{stylename} WHERE id = #{id}
+  </update>
+
+  <!--删除菜系-->
+  <delete id="deleteList">
+    DELETE FROM style WHERE id IN
+    <foreach collection="array" open="(" close=")" separator="," item="pk">
+      #{pk}
+    </foreach>
+  </delete>
+
+</mapper>

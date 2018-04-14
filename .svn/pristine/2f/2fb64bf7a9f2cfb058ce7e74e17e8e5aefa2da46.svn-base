@@ -1,0 +1,67 @@
+package empty;
+
+import java.util.Formatter;
+
+public class Orders {
+    private Integer id;
+
+    private Integer dtabId;
+
+    private Integer detailId;
+
+    private Double ordertotaleprice;
+
+    private String orderdate;
+
+    private Integer orderstate;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getDtabId() {
+        return dtabId;
+    }
+
+    public void setDtabId(Integer dtabId) {
+        this.dtabId = dtabId;
+    }
+
+    public Integer getDetailId() {
+        return detailId;
+    }
+
+    public void setDetailId(Integer detailId) {
+        this.detailId = detailId;
+    }
+
+    public Double getOrdertotaleprice() {
+        return ordertotaleprice;
+    }
+
+    public void setOrdertotaleprice(Double ordertotaleprice) {
+        this.ordertotaleprice = ordertotaleprice;
+    }
+
+    public String getOrderdate() {
+        return orderdate;
+    }
+
+    public void setOrderdate(String orderdate) {
+
+        String sub = orderdate.substring(0, orderdate.length()-2);
+        this.orderdate = sub;
+    }
+
+    public Integer getOrderstate() {
+        return orderstate;
+    }
+
+    public void setOrderstate(Integer orderstate) {
+        this.orderstate = orderstate;
+    }
+}

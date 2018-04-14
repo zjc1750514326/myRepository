@@ -1,0 +1,30 @@
+package mapper;
+
+import empty.Dtable;
+import empty.DtableExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+public interface DtableMapper {
+    int countByExample(DtableExample example);
+
+    int deleteByExample(DtableExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Dtable record);
+
+    int insertSelective(Dtable record);
+
+    List<Dtable> selectByExample(DtableExample example);
+
+    Dtable selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") Dtable record, @Param("example") DtableExample example);
+
+    int updateByExample(@Param("record") Dtable record, @Param("example") DtableExample example);
+
+    int updateByPrimaryKeySelective(Dtable record);
+
+    int updateByPrimaryKey(Dtable record);
+}

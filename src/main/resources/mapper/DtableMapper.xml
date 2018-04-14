@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DtableMapper" >
+  <resultMap id="BaseResultMap" type="empty.Dtable" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="tableName" property="tablename" jdbcType="VARCHAR" />
+    <result column="tableState" property="tablestate" jdbcType="INTEGER" />
+  </resultMap>
+
+  <!--动态查询餐桌列表-->
+  <select id="selectPageListUseDyc" parameterType="empty.Page" resultMap="BaseResultMap">
+    SELECT id,tableName,tableState FROM dtable limit #{start},#{rows}
+  </select>
+
+  <!--查询餐桌个数-->
+  <select id="selectPageCountUseDyc" resultType="Integer">
+    SELECT COUNT(1) FROM dtable
+  </select>
+
+  <!--添加餐桌-->
+  <insert id="insert" parameterType="empty.Dtable">
+    INSERT INTO dtable(id,tableName,tableState) VALUES (#{id},#{tablename},#{tablestate})
+  </insert>
+
+  <!--修改餐桌-->
+  <update id="update" parameterType="empty.Dtable">
+    UPDATE dtable SET tableName = #{tablename},tableState = #{tablestate} WHERE id = #{id}
+  </update>
+
+  <!--删除-->
+  <delete id="deleteList">
+    DELETE FROM dtable WHERE id IN
+    <foreach collection="array" open="(" close=")" separator="," item="pk">
+      #{pk}
+    </foreach>
+  </delete>
+
+</mapper>

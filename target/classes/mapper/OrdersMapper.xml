@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="empty.Orders" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="dtab_id" property="dtabId" jdbcType="INTEGER" />
+    <result column="orderTotaleprice" property="ordertotaleprice" jdbcType="DOUBLE" />
+    <result column="orderDate" property="orderdate" jdbcType="TIMESTAMP"/>
+    <result column="orderState" property="orderstate" jdbcType="INTEGER" />
+  </resultMap>
+
+  <!-- 一对多查询 -->
+  <resultMap id="queryForListMap" type="empty.Orders">
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="dtab_id" property="dtabId" jdbcType="INTEGER" />
+    <result column="orderTotaleprice" property="ordertotaleprice" jdbcType="DOUBLE" />
+    <result column="orderDate" property="orderdate" jdbcType="TIMESTAMP"/>
+    <result column="orderState" property="orderstate" jdbcType="INTEGER" />
+    <!-- 订单明细集合 -->
+    <collection property="orderdetailList" javaType="java.util.List" ofType="empty.Orderdetail">
+      <id column="detail_id" property="detailId" jdbcType="INTEGER" />
+      <result column="foo_id" property="fooId" jdbcType="INTEGER" />
+      <result column="ord_id" property="ordId" jdbcType="VARCHAR" />
+      <result column="food_name" property="foodName" jdbcType="VARCHAR" />
+      <result column="foodCount" property="foodcount" jdbcType="INTEGER" />
+      <result column="food_privice" property="foodPrivice" jdbcType="DOUBLE" />
+      <result column="total_Money" property="totalMoney" jdbcType="DOUBLE" />
+    </collection>
+  </resultMap>
+
+
+  <select id="queryForList" resultMap="queryForListMap">
+    SELECT
+    u.id,
+    u.dtab_id,
+    u.orderTotaleprice,
+    u.orderDate,
+    u.orderState,
+    r.ord_id,
+    r.foo_id,
+    r.food_name,
+    r.foodCount,
+    r.food_privice,
+    r.total_Money
+    FROM
+    orders u
+    LEFT JOIN
+    orderdetail r
+    ON
+    u.id = r.ord_id
+  </select>
+
+
+  <!--动态查询关键字，总记录列表-->
+  <select id="selectPageListUseDyc" parameterType="empty.Page" resultMap="BaseResultMap">
+    SELECT id,dtab_id,orderTotaleprice,orderDate,orderState from orders
+    <where>
+      <if test="paramEntity.id!=null"> and id like #{paramEntity.id}</if>
+    </where>
+    limit #{start},#{rows}
+  </select>
+
+  <!-- 动态查询关键字，总记录数 -->
+  <select id="selectPageCountUseDyc" resultType="Integer">
+    SELECT COUNT(1) from orders
+    <where>
+      <if test="paramEntity.id!=null"> and id like #{paramEntity.id}</if>
+    </where>
+  </select>
+
+  <!-- 新增订单 -->
+  <insert id="insert" parameterType="empty.Orders">
+    INSERT INTO orders(id,dtab_id,orderTotaleprice,orderDate,orderState)
+    VALUES (#{id},#{dtabId},#{ordertotaleprice},#{orderdate},#{orderstate})
+  </insert>
+
+  <select id="select" parameterType="empty.Orders" resultMap="BaseResultMap">
+    SELECT id FROM orders WHERE id = #{id}
+  </select>
+
+</mapper>
