@@ -1,0 +1,20 @@
+server:
+  port: 9002
+
+system:
+  config:
+    # list 映射
+    accounts:
+      - username: zjc
+        password: 123456
+      - username: test
+        password: 123456
+    # map映射
+    map: {id: 1,age: 26}
+    # 占位符
+    port: ${server.port}
+    # 随机数
+    randomNum: ${random.int(10000)}
+spring:
+  profiles:
+    active: dev

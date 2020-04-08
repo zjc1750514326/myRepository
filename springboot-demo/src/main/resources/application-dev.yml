@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/mydemo?useUnicode=true&characterEncoding=utf8&useAffectedRows=true&serverTimezone=UTC
+    username: root
+    password: root
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.zjc.demo.dao: debug
