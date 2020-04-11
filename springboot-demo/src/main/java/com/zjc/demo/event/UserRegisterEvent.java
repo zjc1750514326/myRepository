@@ -1,6 +1,7 @@
 package com.zjc.demo.event;
 
 import com.zjc.demo.bean.UserBean;
+import com.zjc.demo.entity.User;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEvent;
@@ -17,16 +18,16 @@ import org.springframework.context.ApplicationEvent;
 public class UserRegisterEvent extends ApplicationEvent {
 
     /** 注册用户对象 */
-    private UserBean userBean;
+    private User user;
 
     /**
      * 重写构造函数
      * @param source 发生时间的对象
-     * @param userBean 注册用户对象
+     * @param user 注册用户对象
      */
-    public UserRegisterEvent(Object source,UserBean userBean) {
+    public UserRegisterEvent(Object source,User user) {
         super(source);
-        this.userBean = userBean;
+        this.user = user;
         log.info("注册事件发布");
     }
 }

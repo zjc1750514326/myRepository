@@ -1,6 +1,5 @@
 package com.zjc.demo.service;
 
-import com.zjc.demo.bean.UserBean;
 import com.zjc.demo.bean.dbparam.UserParam;
 import com.zjc.demo.entity.User;
 import com.zjc.demo.vo.PageRecords;
@@ -10,9 +9,9 @@ public interface UserService {
 
     /**
      * 注册用户
-     * @param userBean
+     * @param user
      */
-    void register(UserBean userBean);
+    void register(User user);
 
 
     /**
@@ -28,6 +27,13 @@ public interface UserService {
      * @return
      */
     User getUserById(Integer userId);
+
+    /**
+     * 根据用户名查询用户
+     * @param username
+     * @return
+     */
+    User getUserByUsername(String username);
 
     /**
      * 查询所有用户

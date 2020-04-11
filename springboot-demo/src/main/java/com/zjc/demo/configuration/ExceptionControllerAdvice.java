@@ -4,6 +4,7 @@ import com.zjc.demo.common.enums.ResultCode;
 import com.zjc.demo.exception.APIException;
 import com.zjc.demo.exception.DBException;
 import com.zjc.demo.exception.NullEntityException;
+import com.zjc.demo.exception.RepeatException;
 import com.zjc.demo.vo.ResultVO;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -33,6 +34,11 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(DBException.class)
     public ResultVO<String> DBExceptionHandler(DBException e) {
         return new ResultVO<>(ResultCode.DB_ERROR, e.getMsg());
+    }
+
+    @ExceptionHandler(RepeatException.class)
+    public ResultVO<String> RepeatExceptionHandler(RepeatException e) {
+        return new ResultVO<>(ResultCode.ACCOUNT_REPEAT, e.getMsg());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

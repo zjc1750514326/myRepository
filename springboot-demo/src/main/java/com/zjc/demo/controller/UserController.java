@@ -34,21 +34,14 @@ public class UserController {
      * @param user 用户对象
      * @return
      */
-    @ApiOperation("注册")
+    @ApiOperation("用户注册")
     @PostMapping(value = "/register")
-    public String register(@RequestBody UserBean user) {
+    public String register(@RequestBody @Valid  User user) {
         //调用注册业务逻辑
         userService.register(user);
         return "注册成功.";
     }
 
-
-
-    @ApiOperation("添加用户")
-    @PostMapping("/addUser")
-    public Integer addUser(@RequestBody @Valid User user) {
-        return userService.addUser(user);
-    }
 
     @ApiOperation("获得所有用户")
     @GetMapping("/getUsers")

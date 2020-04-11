@@ -27,7 +27,7 @@ import java.util.Set;
 @RestController
 @Slf4j
 @RequestMapping("restTemplate")
-@Api(tags = "RestTemplate Http请求管理层")
+@Api(tags = "请求Http测试管理层")
 public class RestTemplateController {
 
     @Autowired

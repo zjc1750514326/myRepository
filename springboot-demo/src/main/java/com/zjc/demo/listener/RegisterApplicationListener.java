@@ -1,6 +1,7 @@
 package com.zjc.demo.listener;
 
 import com.zjc.demo.bean.UserBean;
+import com.zjc.demo.entity.User;
 import com.zjc.demo.event.UserRegisterEvent;
 import com.zjc.demo.service.impl.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -53,9 +54,9 @@ public class RegisterApplicationListener implements SmartApplicationListener {
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
         UserRegisterEvent userRegisterEvent = (UserRegisterEvent)applicationEvent;
 
-        UserBean userBean = userRegisterEvent.getUserBean();
+        User user = userRegisterEvent.getUser();
 
-        log.info("实现SmartApplicationListener 方式的监听事件 onApplicationEvent  username: "+userBean.getUsername());
+        log.info("实现SmartApplicationListener 方式的监听事件 onApplicationEvent  username: "+user.getAccount());
 
     }
 

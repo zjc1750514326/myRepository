@@ -19,8 +19,7 @@ public interface UserDao {
      * @param user 用户对象
      * @return 成功则返回"success"，失败则返回错误信息
      */
-    @Insert("insert into "+ TableName.TABLE_USER+"(account,password,email) values(#{account},#{password},#{email})")
-    @Options(useGeneratedKeys = true,keyProperty = "id",keyColumn = "id")
+    @Insert("insert into "+ TableName.TABLE_USER+"(account,password,email,delete_flag,check_flag) values(#{account},#{password},#{email},0,0)")
     Integer addUser(User user) throws DataAccessException;
 
 
@@ -60,20 +59,31 @@ public interface UserDao {
      * 在 <script></script>内使用特殊符号，则使用java的转义字符，如  双引号 "" 使用&quot;&quot; 代替
      * concat函数：mysql拼接字符串的函数
      */
+    /** 根据条件查询用户总数 */
     @Select("<script>"
             + "select id, account, password ,email  "
-            + "from user "
+            + "from "+ TableName.TABLE_USER+" "
             + SELECT_USER_SQL
             + LIMIT_SQL
             + "</script> ")
     List<User> getAllUser(UserParam userParam);
 
 
+    /** 根据条件查询用户总数 */
     @Select("<script>"
             + "select count(*)  "
-            + "from user "
+            + "from "+ TableName.TABLE_USER+" "
             + SELECT_USER_SQL
             + "</script> ")
     Integer getAllUserCount(UserParam userParam);
+
+
+    /**
+     * 根据用户名查询用户
+     * @param username
+     * @return
+     */
+    @Select("select * from "+ TableName.TABLE_USER+" where account=#{username} and delete_flag=0 ")
+    User getUserByUsername(@Param("username") String username);
 
 }

@@ -1,6 +1,7 @@
 package com.zjc.demo.listener;
 
 import com.zjc.demo.bean.UserBean;
+import com.zjc.demo.entity.User;
 import com.zjc.demo.event.UserRegisterEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -33,7 +34,7 @@ public class RegisterUserEmailListener {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        UserBean userBean = userRegisterEvent.getUserBean();
-        log.info("注解方式监听:  "+userBean.getUsername()+" 注册成功, sendMail .... 发送邮件");
+        User user = userRegisterEvent.getUser();
+        log.info("注解方式监听 延迟五秒:  "+user.getAccount()+" 注册成功, sendMail .... 发送邮件");
     }
 }
