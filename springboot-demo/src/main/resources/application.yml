@@ -17,4 +17,4 @@ system:
     randomNum: ${random.int(10000)}
 spring:
   profiles:
-    active: dev
+    active: product
